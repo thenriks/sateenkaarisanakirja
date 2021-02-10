@@ -1,15 +1,19 @@
-FROM node:15.8-alpine
+FROM node:10-alpine
 
 # Create app directory
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+WORKDIR /app
+
+
+# add `/app/node_modules/.bin` to $PATH
+ENV PATH /app/node_modules/.bin:$PATH
 
 # Install dependencies
-COPY package.json .
+COPY package.json ./
 RUN npm install
+RUN npm install react-scripts@3.4.4 -g
 
 # Bundle app source
-COPY . .
+COPY . ./
 
 # Exports
 EXPOSE 3000

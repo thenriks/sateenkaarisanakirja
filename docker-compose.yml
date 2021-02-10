@@ -2,6 +2,7 @@ version: '3.8'
 services:
   client:
     container_name: sateenkari_client
+    stdin_open: true
     networks:
       - frontend
     build:
@@ -10,12 +11,14 @@ services:
     volumes:
       - type: bind
         source: ./client
-        target: /usr/src/app
-      - /usr/src/app/node_modules
+        target: /app
+      - /app/node_modules
     depends_on:
       - server
     ports:
       - "3000:3000"
+    environment:
+      - CHOKIDAR_USEPOLLING=true
   server:
     container_name: sateenkaari_server
     networks:
