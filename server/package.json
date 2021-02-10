@@ -1,0 +1,41 @@
+{
+  "name": "rainbow_dictionary",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "heroku-postbuild": "cd client && npm install && npm run build",
+    "dev": "nodemon -L --inspect=0.0.0.0:9229 server.js",
+    "test-server": "cross-env DB_USER=root DB_HOST=localhost DB_DATABASE=test_db DB_PASS=test DB_PORT=5432 node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-validator": "^6.4.1",
+    "helmet": "^3.21.2",
+    "jsonwebtoken": "^8.5.1",
+    "pg": "^8.5.1"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "nodemon": "^2.0.7"
+  },
+  "nodemonConfig": {
+    "ignore": ["node_modules/*", "test/*"],
+    "delay": "2500",
+    "env": {
+      "DB_USER": "root",
+      "DB_HOST": "sateenkaari_pg",
+      "DB_DATABASE": "test_db",
+      "DB_PASS": "test",
+      "DB_PORT": "5432"
+    }
+  }
+}

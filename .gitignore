@@ -1,7 +1,7 @@
-/node_modules
-/tietokanta
+**/node_modules
+**/tietokanta
 
-/test/db_dump
+**/test/db_dump
 
 package-lock.json
 

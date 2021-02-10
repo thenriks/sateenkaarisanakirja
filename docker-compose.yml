@@ -1,0 +1,53 @@
+version: '3.8'
+services:
+  client:
+    container_name: sateenkari_client
+    networks:
+      - frontend
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    volumes:
+      - type: bind
+        source: ./client
+        target: /usr/src/app
+      - /usr/src/app/node_modules
+    depends_on:
+      - server
+    ports:
+      - "3000:3000"
+  server:
+    container_name: sateenkaari_server
+    networks:
+      - backend
+      - frontend
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    volumes:
+      - type: bind
+        source: ./server
+        target: /usr/src/app
+      - /usr/src/app/node_modules
+    depends_on:
+      - db
+    ports:
+      - "8000:8000"
+  db:
+    container_name: sateenkaari_pg
+    image: postgres
+    restart: 'no'
+    networks:
+      - backend
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: test
+      POSTGRES_DB: test_db
+    ports:
+      - "5432:5432"
+
+networks:
+  backend:
+    driver: bridge
+  frontend:
+    driver: bridge
