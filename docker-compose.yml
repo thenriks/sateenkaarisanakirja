@@ -38,7 +38,11 @@ services:
       - "8000:8000"
   db:
     container_name: sateenkaari_pg
-    image: postgres
+    stdin_open: true
+    tty: true
+    build:
+      context: .
+      dockerfile: Dockerfile.db
     restart: 'no'
     networks:
       - backend

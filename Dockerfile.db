@@ -1,0 +1,6 @@
+FROM postgres:13.1-alpine
+
+COPY server/test/db_dump /
+COPY server/test/restore.sh /docker-entrypoint-initdb.d/restore.sh
+
+EXPOSE 5432
